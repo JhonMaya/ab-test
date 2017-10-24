@@ -104,7 +104,6 @@
 
     var itemsBought = 0;
 
-
     if (this._viewmodel.searchCriteria.maxBuy === 0) {
       addMessage("Can't BIN snipe without a max buy now value");
       return;
