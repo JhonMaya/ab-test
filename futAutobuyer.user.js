@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        FUT Autobuyer
-// @version     0.1.3
+// @version     0.1.41
 // @description Automatically search and buy items matching search criteria, currenly based on max buy now value
 // @license     MIT
 // @author      Tim Klingeleers
@@ -24,6 +24,8 @@
 
   GM_setValue('log', ''); // clear the log on restart
   GM_setValue('isSearching', false);
+
+  var playersArray = [];
 
   var addMessage = function addMessage(msg) {
     var oldLog = GM_getValue('log', '');
