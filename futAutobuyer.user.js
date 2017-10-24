@@ -34,8 +34,6 @@
   };
 
   var prevRareItems = 0;
-  var itemsBought = 0;
-  GM_setValue('itemsBought', itemsBought);
 
   var scrollLogToBottom = function scrollLogToBottom() {
     var log = $('#progressAutobuyer');
@@ -56,8 +54,6 @@
 
   var inputStyle = 'margin-left: 3px;outline: none; font-size: 13px; text-align: center; border: none; width: 50px; color: white; background: transparent; font-family: helvetica; height: 20px; border-bottom: 1px solid white;"';
   var labelStyle = 'width: 40%; display: flex; justify-content: space-between;';
-  var itemStyle = 'margin-left: 3px;outline: none; font-size: 13px; text-align: center; display: flex; justify-content: center; align-items: center; border: none; width: 50px; color: white; background: transparent; font-family: helvetica; height: 20px;"';
-  var itemCount = '<label style="'+ labelStyle +'">Item bought: <div id="itemBoughtNumber" type="number" style="' + itemStyle + '">' + GM_getValue('itemsBought') + '</div> </label>';
   var optionContract = '<label style="'+ labelStyle +'">Contract min: <input id="contractValue" type="number" style="' + inputStyle + '" value="0" min="0" max="99" name="contractValue"/> </label>';
   var optionFitness = '<label style="'+ labelStyle +'">Fitness min: <input id="fitnessValue" type="number" style="' + inputStyle + '" value="0"  min="0" max="99" name="fitnessValue"/> </label>';
   var optionRPM = '<label style="'+ labelStyle +'">Delay max: <input id="rpmValue" type="number" style="' + inputStyle + '" value="4" min="0" name="rpmValue"/></label>';
@@ -105,6 +101,9 @@
   };
 
   pages.controllers.AutobuyerController.prototype.onSearchButtonClicked = function () {
+
+    var itemsBought = 0;
+
 
     if (this._viewmodel.searchCriteria.maxBuy === 0) {
       addMessage("Can't BIN snipe without a max buy now value");
