@@ -7,8 +7,8 @@
 // @match       https://www.easports.com/fifa/ultimate-team/web-app/*
 // @match       https://www.easports.com/*/fifa/ultimate-team/web-app/*
 // @namespace   https://github.com/Mardaneus86
-// @updateURL   https://raw.githubusercontent.com/Mardaneus86/futwebapp-tampermonkey/master/autobuyer.user.js
-// @downloadURL https://raw.githubusercontent.com/Mardaneus86/futwebapp-tampermonkey/master/autobuyer.user.js
+// @updateURL   https://bitbucket.org/martineon/ab/raw/9210c8d1d4c385a598c76cee71634b22c3ed5182/futAutobuyer.user.js
+// @downloadURL https://bitbucket.org/martineon/ab/raw/9210c8d1d4c385a598c76cee71634b22c3ed5182/futAutobuyer.user.js
 // @supportURL  https://github.com/Mardaneus86/futwebapp-tampermonkey/issues
 // @grant       GM_setValue
 // @grant       GM_getValue
