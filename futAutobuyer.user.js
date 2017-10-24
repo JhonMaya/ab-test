@@ -7,8 +7,8 @@
 // @match       https://www.easports.com/fifa/ultimate-team/web-app/*
 // @match       https://www.easports.com/*/fifa/ultimate-team/web-app/*
 // @namespace   https://github.com/Mardaneus86
-// @updateURL   https://bitbucket.org/martineon/ab/raw/9210c8d1d4c385a598c76cee71634b22c3ed5182/futAutobuyer.user.js
-// @downloadURL https://bitbucket.org/martineon/ab/raw/9210c8d1d4c385a598c76cee71634b22c3ed5182/futAutobuyer.user.js
+// @updateURL   https://raw.githubusercontent.com/Mardaneus86/futwebapp-tampermonkey/master/autobuyer.user.js
+// @downloadURL https://raw.githubusercontent.com/Mardaneus86/futwebapp-tampermonkey/master/autobuyer.user.js
 // @supportURL  https://github.com/Mardaneus86/futwebapp-tampermonkey/issues
 // @grant       GM_setValue
 // @grant       GM_getValue
@@ -34,6 +34,8 @@
   };
 
   var prevRareItems = 0;
+  var itemsBought = 0;
+  GM_setValue('itemsBought', itemsBought);
 
   var scrollLogToBottom = function scrollLogToBottom() {
     var log = $('#progressAutobuyer');
@@ -54,11 +56,13 @@
 
   var inputStyle = 'margin-left: 3px;outline: none; font-size: 13px; text-align: center; border: none; width: 50px; color: white; background: transparent; font-family: helvetica; height: 20px; border-bottom: 1px solid white;"';
   var labelStyle = 'width: 40%; display: flex; justify-content: space-between;';
+  var itemStyle = 'margin-left: 3px;outline: none; font-size: 13px; text-align: center; display: flex; justify-content: center; align-items: center; border: none; width: 50px; color: white; background: transparent; font-family: helvetica; height: 20px;"';
+  var itemCount = '<label style="'+ labelStyle +'">Item bought: <div id="itemBoughtNumber" type="number" style="' + itemStyle + '">' + GM_getValue('itemsBought') + '</div> </label>';
   var optionContract = '<label style="'+ labelStyle +'">Contract min: <input id="contractValue" type="number" style="' + inputStyle + '" value="0" min="0" max="99" name="contractValue"/> </label>';
   var optionFitness = '<label style="'+ labelStyle +'">Fitness min: <input id="fitnessValue" type="number" style="' + inputStyle + '" value="0"  min="0" max="99" name="fitnessValue"/> </label>';
-  var optionRPM = '<label style="'+ labelStyle +'">RPM max: <input id="rpmValue" type="number" style="' + inputStyle + '" value="4" min="0" name="rpmValue"/></label>';
+  var optionRPM = '<label style="'+ labelStyle +'">Delay max: <input id="rpmValue" type="number" style="' + inputStyle + '" value="4" min="0" name="rpmValue"/></label>';
   var optionNbrItem = '<label style="'+ labelStyle +'">Item max: <input id="itemMaxValue" type="number" style="' + inputStyle + '" value="5" min="1" name="itemMaxValue"/></label>';
-  var autobuyerOptions = '<div style="padding: 15px; height: calc(18% - 30px); color: white; background-color: rgba(0, 0, 0, 0.3); display: flex; flex-wrap: wrap; justify-content: space-between;">'+ optionRPM + optionContract + optionFitness + optionNbrItem +'</div>';
+  var autobuyerOptions = '<div style="padding: 15px; height: calc(18% - 30px); color: white; background-color: rgba(0, 0, 0, 0.3); display: flex; flex-wrap: wrap; justify-content: space-between;">'+ optionRPM + optionContract + optionFitness + optionNbrItem + '</div>';
 
   // page
   pages.Autobuyer = function () {
@@ -101,8 +105,6 @@
   };
 
   pages.controllers.AutobuyerController.prototype.onSearchButtonClicked = function () {
-
-    var itemsBought = 0;
 
     if (this._viewmodel.searchCriteria.maxBuy === 0) {
       addMessage("Can't BIN snipe without a max buy now value");
@@ -178,6 +180,8 @@
                                   bid.addListener(communication.BaseDelegate.SUCCESS, this, function _bidSuccess(sender, response) {
                                       addMessage(i.tradeId + ' bought for ' + i.buyNowPrice);
                                       itemsBought += 1;
+                                      addMessage('You\'ve bought: ' + itemsBought + ' players');
+                                      GM_setValue('itemsBought', itemsBought);
 
                                       GM_notification({
                                           text: "Player bought for " + i.buyNowPrice,
