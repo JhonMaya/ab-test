@@ -24,6 +24,8 @@
 
   GM_setValue('log', ''); // clear the log on restart
   GM_setValue('isSearching', false);
+  
+  var playersArray = [];
 
   var addMessage = function addMessage(msg) {
     var oldLog = GM_getValue('log', '');
