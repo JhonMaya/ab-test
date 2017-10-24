@@ -66,7 +66,7 @@
   pages.Autobuyer = function () {
     pages.Search.call(this);
     this.updateHeader(components.Header.DEFAULT_CHILD_PAGE, "Auto buyer");
-    this.$_root.find('.tabletButtons').append('<div style="padding: 0; float: left;" role="button" class="btn btn-raised"><span id="snipeButton" style="padding: 16px;" class="btn-text">Disable Player Restriction</span><span class="btn-subtext invisible"></span></div>');
+    this.$_root.find('.tabletButtons').append('<div style="padding: 0; float: left;" role="button" class="btn btn-raised"><span id="snipeButton" style="padding: 16px;" class="btn-text">Disable Player Restriction</span><span class="btn-subtext invisible"></span></div><div role="button" class="btn btn-raise"><span id="addButton" style="padding: 16px;" class="btn-text">+</span></div>');
     this.$_root.find('.search-container').css('width', '50%');
     var log = GM_getValue('log', '');
     this.$_root.append('<article class="SearchWrapper" style="width: 50%; left: 50%">'+ autobuyerOptions +'<textarea id="progressAutobuyer" style="width: 100%;height: 80%;">' + log + '</textarea></article>');
